@@ -1,6 +1,5 @@
-version: '2'
-
 services:
+
     dashboard:
         extends:
             file: dashboard_ui/app.yml
@@ -16,5 +15,3 @@ services:
         restart: unless-stopped
         depends_on:
             - "mqtt_broker"
-networks:
-    internal:
