@@ -21,7 +21,7 @@ import shutil
 copy_from = str(Path(__file__).parents[3].joinpath("UserConfig/dashboards"))
 copy_to = str(Path(__file__).parents[2].joinpath("Grafana/dashboard_ui/config/dashboards"))
 
-shutil.copytree(copy_from, copy_to)
+shutil.copytree(copy_from, copy_to, dirs_exist_ok=True)
 
 # A forseeable problem with this approach is that the config file must be edited before this script is run,
 # If the userconfig is edited after the service modules have been downloaded, it won't be loaded. 
