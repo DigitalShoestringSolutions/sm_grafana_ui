@@ -10,19 +10,26 @@
 #
 # The purpose is to make the UserConfig/daashboards
 #   available to the ServiceModules/Grafana docker container.
-# Copy Solution's user config file to within the container:
+
+
+# Create hard nonsymbolic Unix link between the file in UserConfig and the SM:
 
 from pathlib import Path
-import shutil
+import os
 
 # Note that due to the dubious exec(f.read()) that actually runs this script, 
 #   Path(__file__) returns the Assembly/ShoestringAssembler location!
 
-copy_from = str(Path(__file__).parents[3].joinpath("UserConfig/dashboards"))
-copy_to = str(Path(__file__).parents[2].joinpath("Grafana/dashboard_ui/config/dashboards"))
+config_dashboards_dir_abs = Path(__file__).parents[3].joinpath("UserConfig/dashboards")
+SM_dashboards_dir_abs = Path(__file__).parents[2].joinpath("Grafana/dashboard_ui/config/dashboards")
 
-shutil.copytree(copy_from, copy_to, dirs_exist_ok=True)
-
-# A forseeable problem with this approach is that the config file must be edited before this script is run,
-# If the userconfig is edited after the service modules have been downloaded, it won't be loaded. 
-# This must be improved!
+for dashboard in config_dashboards_dir_abs.rglob('*'):
+    dest_path = SM_dashboards_dir_abs.joinpath(dashboard.relative_to(config_dashboards_dir_abs))
+    
+    if dashboard.is_dir():
+        # Directory names with spaces are natively supported
+        os.mkdir(dest_path)
+    
+    else:
+        # Note how both "paths are in quotes" to support names with whitespace
+        os.system('ln "' + str(dashboard) + '" "' + str(dest_path) + '"')
