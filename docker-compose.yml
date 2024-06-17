@@ -6,10 +6,10 @@ services:
         ports:
             - '3000:3000'
         volumes:
-            - './dashboard_ui/data:/var/lib/grafana/data'
-            - './dashboard_ui/config/dashboards:/var/lib/grafana/dashboards'  
-            - './dashboard_ui/config/provisioning:/var/lib/grafana/provisioning'  
-            - './dashboard_ui/config/grafana.ini:/var/lib/grafana/grafana.ini'  
+            - './data:/var/lib/grafana/data'
+            - './config/dashboards:/var/lib/grafana/dashboards'  
+            - './config/provisioning:/var/lib/grafana/provisioning'  
+            - './config/grafana.ini:/var/lib/grafana/grafana.ini'  
         environment:
             - GF_PATHS_CONFIG=/var/lib/grafana/grafana.ini
             - GF_PATHS_DATA=/var/lib/grafana/data
