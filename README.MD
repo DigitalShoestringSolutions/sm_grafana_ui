@@ -1,4 +1,5 @@
 # Shoestring Dashboard User Interface Service Module
+
 ## Description
 This user interface service module uses [grafana](https://grafana.com/), to present timeseries measurements and metrics using graphs, dials, etc. 
 
@@ -18,4 +19,5 @@ You can replace or add to these dashboards by:
 > It is critical that the grafana instance you use to create dashboards has had its inputs provisioned in the same way as the target system ***so that the datasource ids match*** otherwise the loaded dashboards won't query data correctly
 
 ## Docker details
-Docker needs to be started with the `start.sh` script which primes the compose file with the current user id as an environment variable so that grafana can be started with the same user id to reduce file permission issues
+This Docker container needs to be started with awareness of the user id to reduce file permission issues.  
+This is usually done with a `start.sh` script which executes ```CURRENT_UID="$(id -u)" docker-compose up``` which primes the compose file with the current user id as an environment variable so that grafana can be started with the same user id.
