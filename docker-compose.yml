@@ -1,7 +1,7 @@
 services:
 
     dashboard:
-        image: grafana/grafana-oss:9.4.7
+        image: grafana/grafana-oss:11.1.3
         user: $CURRENT_UID
         ports:
             - '3000:3000'
