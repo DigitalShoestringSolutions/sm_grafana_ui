@@ -26,5 +26,4 @@ services:
                 options:
                         tag: docker-dashboard-ui
         restart: unless-stopped
-        depends_on:
-            - "mqtt_broker"
+        
