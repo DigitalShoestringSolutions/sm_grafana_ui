@@ -1,0 +1,3 @@
+* consider only having datasources provisioned from solution config files
+* consider moving plugins to being installed in dockerfile?
+* consider how plugins work when specified by solution config
