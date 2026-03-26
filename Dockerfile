@@ -9,3 +9,4 @@ COPY ./files/grafana.ini /var/lib/grafana/grafana.ini
 COPY --from=solution_config ./dashboards /var/lib/grafana/dashboards
 COPY --from=solution_config ./datasources/. /var/lib/grafana/provisioning/datasources/
 
+ENV GF_INSTALL_PLUGINS="marcusolsson-json-datasource,grafana-mqtt-datasource"
